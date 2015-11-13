@@ -92,7 +92,6 @@ resource "aws_vpc_endpoint" "s3" {
 #
 
 resource "aws_security_group" "nat" {
-  name = "nat-security-group"
   vpc_id = "${aws_vpc.default.id}"
 
   ingress {
@@ -149,7 +148,6 @@ resource "aws_instance" "nat" {
 #
 
 resource "aws_security_group" "bastion" {
-  name = "bastion-security-group"
   vpc_id = "${aws_vpc.default.id}"
 
   ingress {
