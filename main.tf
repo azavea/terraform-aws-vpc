@@ -43,6 +43,8 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_subnet" "private" {
+  lifecycle { create_before_destroy = true }
+
   count = "${length(split(",", var.private_subnet_cidr_blocks))}"
 
   vpc_id = "${aws_vpc.default.id}"
@@ -55,6 +57,8 @@ resource "aws_subnet" "private" {
 }
 
 resource "aws_subnet" "public" {
+  lifecycle { create_before_destroy = true }
+
   count = "${length(split(",", var.public_subnet_cidr_blocks))}"
 
   vpc_id = "${aws_vpc.default.id}"
