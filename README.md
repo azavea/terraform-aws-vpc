@@ -45,3 +45,5 @@ module "vpc" {
 - `public_subnet_ids` - List of public subnet IDs
 - `private_subnets_ids` - List of private subnet IDs
 - `bastion_hostname` - Public DNS name for bastion instance
+- `nat_security_group_id` - ID of the security group for the NAT instance
+- `cidr_block` - The CIDR block associated with the VPC
