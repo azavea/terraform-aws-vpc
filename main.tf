@@ -104,37 +104,37 @@ resource "aws_vpc_endpoint" "s3" {
 resource "aws_security_group" "nat" {
   vpc_id = "${aws_vpc.default.id}"
 
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["${aws_vpc.default.cidr_block}"]
-  }
-
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["${aws_vpc.default.cidr_block}"]
-  }
-
-  egress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   tags {
     Name = "sgNAT"
   }
+}
+
+resource "aws_security_group_rule" "allow_port_ingress" {
+  count = "${length(split(",", var.nat_egress_ports))}"
+
+  type = "ingress"
+
+  cidr_blocks = ["${var.cidr_block}"]
+  from_port = "${element(split(",", var.nat_egress_ports), count.index)}"
+  to_port = "${element(split(",", var.nat_egress_ports), count.index)}"
+
+  protocol = "tcp"
+
+  security_group_id = "${aws_security_group.nat.id}"
+}
+
+resource "aws_security_group_rule" "allow_port_egress" {
+  count = "${length(split(",", var.nat_egress_ports))}"
+
+  type = "egress"
+
+  cidr_blocks = ["0.0.0.0/0"]
+  from_port = "${element(split(",", var.nat_egress_ports), count.index)}"
+  to_port = "${element(split(",", var.nat_egress_ports), count.index)}"
+
+  protocol = "tcp"
+
+  security_group_id = "${aws_security_group.nat.id}"
 }
 
 resource "aws_instance" "nat" {
