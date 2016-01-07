@@ -36,6 +36,10 @@ variable "nat_instance_type" {
   default = "t2.micro"
 }
 
+variable "nat_egress_ports" {
+  default = "80,443"
+}
+
 variable "bastion_ami" {
 }
 
