@@ -23,7 +23,7 @@ resource "aws_route_table" "private" {
 
   route {
     cidr_block  = "0.0.0.0/0"
-    instance_id = "${element(aws_instance.nat.*.id, count.index)}"
+    nat_gateway_id = "${element(aws_nat_gateway.default.*.id, count.index)}"
   }
 
   tags {
@@ -101,58 +101,19 @@ resource "aws_vpc_endpoint" "s3" {
 # NAT resources
 #
 
-resource "aws_security_group" "nat" {
-  vpc_id = "${aws_vpc.default.id}"
-
-  tags {
-    Name = "sgNAT"
-  }
-}
-
-resource "aws_security_group_rule" "allow_port_ingress" {
-  count = "${length(split(",", var.nat_egress_ports))}"
-
-  type = "ingress"
-
-  cidr_blocks = ["${var.cidr_block}"]
-  from_port = "${element(split(",", var.nat_egress_ports), count.index)}"
-  to_port = "${element(split(",", var.nat_egress_ports), count.index)}"
-
-  protocol = "tcp"
-
-  security_group_id = "${aws_security_group.nat.id}"
-}
-
-resource "aws_security_group_rule" "allow_port_egress" {
-  count = "${length(split(",", var.nat_egress_ports))}"
-
-  type = "egress"
-
-  cidr_blocks = ["0.0.0.0/0"]
-  from_port = "${element(split(",", var.nat_egress_ports), count.index)}"
-  to_port = "${element(split(",", var.nat_egress_ports), count.index)}"
-
-  protocol = "tcp"
-
-  security_group_id = "${aws_security_group.nat.id}"
-}
-
-resource "aws_instance" "nat" {
+resource "aws_eip" "nat" {
   count = "${length(split(",", var.public_subnet_cidr_blocks))}"
 
-  ami                         = "${var.nat_ami}"
-  availability_zone           = "${element(split(",", var.availability_zones), count.index)}"
-  instance_type               = "${var.nat_instance_type}"
-  key_name                    = "${var.key_name}"
-  monitoring                  = true
-  vpc_security_group_ids      = ["${aws_security_group.nat.id}"]
-  subnet_id                   = "${element(aws_subnet.public.*.id, count.index)}"
-  associate_public_ip_address = true
-  source_dest_check           = false
+  vpc = true
+}
 
-  tags {
-    Name = "NATDevice"
-  }
+resource "aws_nat_gateway" "default" {
+  count = "${length(split(",", var.public_subnet_cidr_blocks))}"
+
+  allocation_id = "${element(aws_eip.nat.*.id, count.index)}"
+  subnet_id = "${element(aws_subnet.public.*.id, count.index)}"
+
+  depends_on = ["aws_internet_gateway.default"]
 }
 
 #
