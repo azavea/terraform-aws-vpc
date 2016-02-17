@@ -29,17 +29,6 @@ variable "availability_zones" {
   default = "us-east-1a,us-east-1b"
 }
 
-variable "nat_ami" {
-}
-
-variable "nat_instance_type" {
-  default = "t2.micro"
-}
-
-variable "nat_egress_ports" {
-  default = "80,443"
-}
-
 variable "bastion_ami" {
 }
 

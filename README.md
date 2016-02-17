@@ -16,9 +16,6 @@ module "vpc" {
   private_subnet_cidr_blocks = "10.0.1.0/24,10.0.3.0/24"
   public_subnet_cidr_blocks = "10.0.0.0/24,10.0.2.0/24"
   availability_zones = "us-east-1a,us-east-1b"
-  nat_ami = "ami-303b1458"
-  nat_instance_type = "t2.micro"
-  nat_egress_ports = "22,80,443,587"
   bastion_ami = "ami-ff02509a"
   bastion_instance_type = "t2.micro"
 }
@@ -35,9 +32,6 @@ module "vpc" {
 - `public_subnet_cidr_blocks` - Comma delimited list of public subnet CIDR blocks (default: `10.0.0.0/24,10.0.2.0/24`)
 - `private_subnet_cidr_blocks` - Comma delimited list of private subnet CIDR blocks (default: `10.0.1.0/24,10.0.3.0/24`)
 - `availability_zones` - Comma delimited list of availability zones (default: `us-east-1a,us-east-1b`)
-- `nat_ami` - NAT Amazon Machine Image (AMI) ID
-- `nat_instance_type` - Instance type for NAT instance (default: `t2.micro`))
-- `nat_egress_ports` - Ports to open on the NAT instance for connecting out to the internet (default: `80,443`)
 - `bastion_ami` - Bastion Amazon Machine Image (AMI) ID
 - `bastion_instance_type` - Instance type for bastion instance (default: `t2.micro`))
 
@@ -47,5 +41,4 @@ module "vpc" {
 - `public_subnet_ids` - List of public subnet IDs
 - `private_subnets_ids` - List of private subnet IDs
 - `bastion_hostname` - Public DNS name for bastion instance
-- `nat_security_group_id` - ID of the security group for the NAT instance
 - `cidr_block` - The CIDR block associated with the VPC
