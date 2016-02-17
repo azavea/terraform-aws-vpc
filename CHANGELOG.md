@@ -1,3 +1,7 @@
+## 0.4.0
+
+- Replace manual NAT setup for VPC with AWS managed NAT Gateways.
+
 ## 0.3.0
 
 - Output `nat_security_group_id` so additional rules can be created
