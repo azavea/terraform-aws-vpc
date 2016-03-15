@@ -123,37 +123,45 @@ resource "aws_nat_gateway" "default" {
 resource "aws_security_group" "bastion" {
   vpc_id = "${aws_vpc.default.id}"
 
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["${var.external_access_cidr_block}"]
-  }
-
-  egress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["${aws_vpc.default.cidr_block}"]
-  }
-
-  egress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   tags {
     Name = "sgBastion"
   }
+}
+
+resource "aws_security_group_rule" "bastion_ssh_ingress" {
+  type = "ingress"
+  from_port = 22
+  to_port = 22
+  protocol = "tcp"
+  cidr_blocks = ["${var.external_access_cidr_block}"]
+  security_group_id = "${aws_security_group.bastion.id}"
+}
+
+resource "aws_security_group_rule" "bastion_ssh_egress" {
+  type = "egress"
+  from_port = 22
+  to_port = 22
+  protocol = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.bastion.id}"
+}
+
+resource "aws_security_group_rule" "bastion_http_egress" {
+  type = "egress"
+  from_port = 80
+  to_port = 80
+  protocol = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.bastion.id}"
+}
+
+resource "aws_security_group_rule" "bastion_https_egress" {
+  type = "egress"
+  from_port = 443
+  to_port = 443
+  protocol = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.bastion.id}"
 }
 
 resource "aws_instance" "bastion" {
