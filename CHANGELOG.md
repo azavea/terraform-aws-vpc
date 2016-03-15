@@ -1,3 +1,9 @@
+## 1.0.0
+
+- Use the `aws_security_group_rule` resource to define security group rules
+  internally.
+- Output the `bastion_security_group_id`.
+
 ## 0.4.0
 
 - Replace manual NAT setup for VPC with AWS managed NAT Gateways.
