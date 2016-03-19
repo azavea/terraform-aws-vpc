@@ -1,3 +1,7 @@
+## 1.1.0
+
+- Associate route tables for private subnets to S3 VPC endpoint.
+
 ## 1.0.0
 
 - Use the `aws_security_group_rule` resource to define security group rules
