@@ -2,6 +2,14 @@ variable "name" {
   default = "Default"
 }
 
+variable "project" {
+  default = "Unknown"
+}
+
+variable "environment" {
+  default = "Unknown"
+}
+
 variable "region" {
   default = "us-east-1"
 }

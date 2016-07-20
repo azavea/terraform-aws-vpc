@@ -8,7 +8,9 @@ resource "aws_vpc" "default" {
   enable_dns_hostnames = true
 
   tags {
-    Name = "${var.name}"
+    Name        = "${var.name}"
+    Project     = "${var.project}"
+    Environment = "${var.environment}"
   }
 }
 
@@ -27,7 +29,9 @@ resource "aws_route_table" "private" {
   }
 
   tags {
-    Name = "PrivateRouteTable"
+    Name        = "PrivateRouteTable"
+    Project     = "${var.project}"
+    Environment = "${var.environment}"
   }
 }
 
@@ -40,7 +44,9 @@ resource "aws_route_table" "public" {
   }
 
   tags {
-    Name = "PublicRouteTable"
+    Name        = "PublicRouteTable"
+    Project     = "${var.project}"
+    Environment = "${var.environment}"
   }
 }
 
@@ -52,7 +58,9 @@ resource "aws_subnet" "private" {
   availability_zone = "${element(split(",", var.availability_zones), count.index)}"
 
   tags {
-    Name = "PrivateSubnet"
+    Name        = "PrivateSubnet"
+    Project     = "${var.project}"
+    Environment = "${var.environment}"
   }
 }
 
@@ -65,7 +73,9 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags {
-    Name = "PublicSubnet"
+    Name        = "PublicSubnet"
+    Project     = "${var.project}"
+    Environment = "${var.environment}"
   }
 }
 
@@ -116,7 +126,9 @@ resource "aws_security_group" "bastion" {
   vpc_id = "${aws_vpc.default.id}"
 
   tags {
-    Name = "sgBastion"
+    Name        = "sgBastion"
+    Project     = "${var.project}"
+    Environment = "${var.environment}"
   }
 }
 
@@ -167,6 +179,8 @@ resource "aws_instance" "bastion" {
   associate_public_ip_address = true
 
   tags {
-    Name = "Bastion"
+    Name        = "Bastion"
+    Project     = "${var.project}"
+    Environment = "${var.environment}"
   }
 }

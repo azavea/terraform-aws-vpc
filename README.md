@@ -18,12 +18,17 @@ module "vpc" {
   availability_zones = "us-east-1a,us-east-1b"
   bastion_ami = "ami-ff02509a"
   bastion_instance_type = "t2.micro"
+
+  project = "Something"
+  environment = "Staging"
 }
 ```
 
 ## Variables
 
 - `name` - Name of the VPC (default: `Default`)
+- `project` - Name of project this VPC is meant to house (default: `Unknown`)
+- `environment` - Name of environment this VPC is targeting (default: `Unknown`)
 - `region` - Region of the VPC (default: `us-east-1`)
 - `key_name` - EC2 Key pair name
 - `cidr_block` - CIDR block to allocate for the VPC (default: `10.0.0.0/16`)
