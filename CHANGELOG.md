@@ -1,3 +1,9 @@
+## 2.0.0
+
+- Remove security group rules from bastion security group.
+- Add module attributes for `project` and `environment`.
+- Remove `create_before_destroy` lifecycle resources from subnets.
+
 ## 1.1.0
 
 - Associate route tables for private subnets to S3 VPC endpoint.
