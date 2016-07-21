@@ -2,12 +2,19 @@ variable "name" {
   default = "Default"
 }
 
+variable "project" {
+  default = "Unknown"
+}
+
+variable "environment" {
+  default = "Unknown"
+}
+
 variable "region" {
   default = "us-east-1"
 }
 
-variable "key_name" {
-}
+variable "key_name" {}
 
 variable "cidr_block" {
   default = "10.0.0.0/16"
@@ -29,8 +36,7 @@ variable "availability_zones" {
   default = "us-east-1a,us-east-1b"
 }
 
-variable "bastion_ami" {
-}
+variable "bastion_ami" {}
 
 variable "bastion_instance_type" {
   default = "t2.micro"
