@@ -1,3 +1,7 @@
+## 2.0.1
+
+- 2.0.0 release was botched; includes contents of that release.
+
 ## 2.0.0
 
 - Remove security group rules from bastion security group.
