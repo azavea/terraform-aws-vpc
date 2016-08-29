@@ -19,7 +19,7 @@ resource "aws_internet_gateway" "default" {
 }
 
 resource "aws_route_table" "private" {
-  count = "${length(split(",", var.private_subnet_cidr_blocks))}"
+  count = "${length(var.private_subnet_cidr_blocks)}"
 
   vpc_id = "${aws_vpc.default.id}"
 
@@ -51,11 +51,11 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_subnet" "private" {
-  count = "${length(split(",", var.private_subnet_cidr_blocks))}"
+  count = "${length(var.private_subnet_cidr_blocks)}"
 
   vpc_id            = "${aws_vpc.default.id}"
-  cidr_block        = "${element(split(",", var.private_subnet_cidr_blocks), count.index)}"
-  availability_zone = "${element(split(",", var.availability_zones), count.index)}"
+  cidr_block        = "${element(var.private_subnet_cidr_blocks, count.index)}"
+  availability_zone = "${element(var.availability_zones, count.index)}"
 
   tags {
     Name        = "PrivateSubnet"
@@ -65,11 +65,11 @@ resource "aws_subnet" "private" {
 }
 
 resource "aws_subnet" "public" {
-  count = "${length(split(",", var.public_subnet_cidr_blocks))}"
+  count = "${length(var.public_subnet_cidr_blocks)}"
 
   vpc_id                  = "${aws_vpc.default.id}"
-  cidr_block              = "${element(split(",", var.public_subnet_cidr_blocks), count.index)}"
-  availability_zone       = "${element(split(",", var.availability_zones), count.index)}"
+  cidr_block              = "${element(var.public_subnet_cidr_blocks, count.index)}"
+  availability_zone       = "${element(var.availability_zones, count.index)}"
   map_public_ip_on_launch = true
 
   tags {
@@ -80,14 +80,14 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_route_table_association" "private" {
-  count = "${length(split(",", var.private_subnet_cidr_blocks))}"
+  count = "${length(var.private_subnet_cidr_blocks)}"
 
   subnet_id      = "${element(aws_subnet.private.*.id, count.index)}"
   route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
 }
 
 resource "aws_route_table_association" "public" {
-  count = "${length(split(",", var.public_subnet_cidr_blocks))}"
+  count = "${length(var.public_subnet_cidr_blocks)}"
 
   subnet_id      = "${element(aws_subnet.public.*.id, count.index)}"
   route_table_id = "${aws_route_table.public.id}"
@@ -104,13 +104,13 @@ resource "aws_vpc_endpoint" "s3" {
 #
 
 resource "aws_eip" "nat" {
-  count = "${length(split(",", var.public_subnet_cidr_blocks))}"
+  count = "${length(var.public_subnet_cidr_blocks)}"
 
   vpc = true
 }
 
 resource "aws_nat_gateway" "default" {
-  count = "${length(split(",", var.public_subnet_cidr_blocks))}"
+  count = "${length(var.public_subnet_cidr_blocks)}"
 
   allocation_id = "${element(aws_eip.nat.*.id, count.index)}"
   subnet_id     = "${element(aws_subnet.public.*.id, count.index)}"
@@ -134,7 +134,7 @@ resource "aws_security_group" "bastion" {
 
 resource "aws_instance" "bastion" {
   ami                         = "${var.bastion_ami}"
-  availability_zone           = "${element(split(",", var.availability_zones), 0)}"
+  availability_zone           = "${element(var.availability_zones, 0)}"
   instance_type               = "${var.bastion_instance_type}"
   key_name                    = "${var.key_name}"
   monitoring                  = true
