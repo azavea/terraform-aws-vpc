@@ -1,3 +1,8 @@
+## 3.0.0
+
+- Add support for Terraform 0.7.
+- Convert comma-delimited variables with lists types.
+
 ## 2.0.1
 
 - 2.0.0 release was botched; includes contents of that release.
