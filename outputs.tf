@@ -21,3 +21,7 @@ output "bastion_security_group_id" {
 output "cidr_block" {
   value = "${var.cidr_block}"
 }
+
+output "nat_gateway_ips" {
+  value = ["${aws_eip.nat.*.public_ip}"]
+}
