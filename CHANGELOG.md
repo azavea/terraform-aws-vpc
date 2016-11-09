@@ -1,3 +1,7 @@
+## 3.1.0
+
+- Add output for `nat_gateway_ips`, which are the Elastic IPs bound to NAT Gateways.
+
 ## 3.0.0
 
 - Add support for Terraform 0.7.
