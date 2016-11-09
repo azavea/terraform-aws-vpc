@@ -48,3 +48,4 @@ module "vpc" {
 - `bastion_hostname` - Public DNS name for bastion instance
 - `bastion_security_group_id` - Security group ID tied to bastion instance
 - `cidr_block` - The CIDR block associated with the VPC
+- `nat_gateway_ips` - List of Elastic IPs associated with NAT gateways
