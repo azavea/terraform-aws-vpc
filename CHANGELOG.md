@@ -1,3 +1,7 @@
+## 3.1.1
+
+- Make use of standalone `aws_route` vs. the `route` attributes of the `aws_route_table` resource.
+
 ## 3.1.0
 
 - Add output for `nat_gateway_ips`, which are the Elastic IPs bound to NAT Gateways.
