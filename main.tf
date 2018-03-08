@@ -138,7 +138,7 @@ resource "aws_security_group" "bastion" {
 
 resource "aws_network_interface_sg_attachment" "bastion" {
   security_group_id = "${aws_security_group.bastion.id}"
-  network_interface_id = "${aws_instance.bastion.primary_network_interface}"
+  network_interface_id = "${aws_instance.bastion.primary_network_interface_id}"
 }
 
 resource "aws_instance" "bastion" {

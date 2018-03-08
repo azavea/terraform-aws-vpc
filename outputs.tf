@@ -19,7 +19,7 @@ output "bastion_security_group_id" {
 }
 
 output "bastion_network_interface" {
-  value = "${aws_instance.bastion.primary_network_interface}"
+  value = "${aws_instance.bastion.primary_network_interface_id}"
 }
 
 output "cidr_block" {
