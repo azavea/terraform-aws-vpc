@@ -1,3 +1,8 @@
+## 4.0.0
+
+- Make use of standalone `aws_network_interface_sg_attachment` vs. the `vpc_security_group_ids` attribute of the `aws_instance` resource.
+- Add output for `bastion_network_interface_id`, which is the ID of the primary network interface for the bastion instance.
+
 ## 3.1.1
 
 - Make use of standalone `aws_route` vs. the `route` attributes of the `aws_route_table` resource.
