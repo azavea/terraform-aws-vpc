@@ -18,6 +18,10 @@ output "bastion_security_group_id" {
   value = "${aws_security_group.bastion.id}"
 }
 
+output "bastion_network_interface_id" {
+  value = "${aws_instance.bastion.primary_network_interface_id}"
+}
+
 output "cidr_block" {
   value = "${var.cidr_block}"
 }
