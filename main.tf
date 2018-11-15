@@ -134,6 +134,13 @@ resource "aws_security_group" "bastion" {
     Project     = "${var.project}"
     Environment = "${var.environment}"
   }
+
+  ingress {
+    from        = 22
+    to          = 22
+    protocol    = "tcp"
+    cidr_blocks = ["${var.external_access_cidr_block}"]
+  }
 }
 
 resource "aws_network_interface_sg_attachment" "bastion" {
