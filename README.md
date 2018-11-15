@@ -6,14 +6,14 @@ A Terraform module to create an Amazon Web Services (AWS) Virtual Private Cloud 
 
 This module creates a VPC alongside a variety of related resources, including:
 
-    - Two public and private subnets
-    - Two public and private route tables
-    - Two Elastic IPs
-    - Two Network Interfaces
-    - Two NAT Gateways
-    - An Internet Gateway
-    - A VPC Endpoint
-    - A bastion EC2 instance
+- Two public and private subnets
+- Two public and private route tables
+- Two Elastic IPs
+- Two Network Interfaces
+- Two NAT Gateways
+- An Internet Gateway
+- A VPC Endpoint
+- A bastion EC2 instance
 
 Example usage:
 
