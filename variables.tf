@@ -20,10 +20,6 @@ variable "cidr_block" {
   default = "10.0.0.0/16"
 }
 
-variable "external_access_cidr_block" {
-  default = "0.0.0.0/0"
-}
-
 variable "public_subnet_cidr_blocks" {
   type    = "list"
   default = ["10.0.0.0/24", "10.0.2.0/24"]
