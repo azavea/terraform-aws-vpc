@@ -28,8 +28,9 @@ module "vpc" {
   private_subnet_cidr_blocks = ["10.0.1.0/24", "10.0.3.0/24"]
   public_subnet_cidr_blocks = ["10.0.0.0/24", "10.0.2.0/24"]
   availability_zones = ["us-east-1a", "us-east-1b"]
-  bastion_ami = "ami-ff02509a"
-  bastion_instance_type = "t2.micro"
+  bastion_ami = "ami-6869aa05"
+  bastion_ebs_optimized = true
+  bastion_instance_type = "t3.micro"
 
   project = "Something"
   environment = "Staging"
@@ -90,7 +91,8 @@ resource "aws_network_interface_sg_attachment" "sg_attachment" {
 - `private_subnet_cidr_blocks` - List of private subnet CIDR blocks (default: `["10.0.1.0/24", "10.0.3.0/24"]`)
 - `availability_zones` - List of availability zones (default: `["us-east-1a", "us-east-1b"]`)
 - `bastion_ami` - Bastion Amazon Machine Image (AMI) ID
-- `bastion_instance_type` - Instance type for bastion instance (default: `t2.micro`))
+- `bastion_ebs_optimized` - If true, the bastion instance will be EBS-optimized (default: `false`)
+- `bastion_instance_type` - Instance type for bastion instance (default: `t2.micro`)
 
 ## Outputs
 
