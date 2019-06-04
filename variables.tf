@@ -37,6 +37,10 @@ variable "availability_zones" {
 
 variable "bastion_ami" {}
 
+variable "bastion_ebs_optimized" {
+  default = true
+}
+
 variable "bastion_instance_type" {
-  default = "t2.micro"
+  default = "t3.micro"
 }

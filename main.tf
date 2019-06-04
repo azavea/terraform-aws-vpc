@@ -144,6 +144,7 @@ resource "aws_network_interface_sg_attachment" "bastion" {
 resource "aws_instance" "bastion" {
   ami                         = "${var.bastion_ami}"
   availability_zone           = "${element(var.availability_zones, 0)}"
+  ebs_optimized               = "${var.bastion_ebs_optimized}"
   instance_type               = "${var.bastion_instance_type}"
   key_name                    = "${var.key_name}"
   monitoring                  = true
