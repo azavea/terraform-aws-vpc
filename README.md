@@ -29,6 +29,7 @@ module "vpc" {
   public_subnet_cidr_blocks = ["10.0.0.0/24", "10.0.2.0/24"]
   availability_zones = ["us-east-1a", "us-east-1b"]
   bastion_ami = "ami-6869aa05"
+  bastion_ebs_optimized = true
   bastion_instance_type = "t3.micro"
 
   project = "Something"
