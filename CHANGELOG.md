@@ -1,3 +1,7 @@
+## 5.0.1
+
+- `element()` -> `listvar[idx]`
+
 ## 5.0.0
 
 - Remove `external_access_cidr_block` variable. See the README for a guide on
