@@ -95,6 +95,7 @@ resource "aws_network_interface_sg_attachment" "sg_attachment" {
 - `bastion_ami` - Bastion Amazon Machine Image (AMI) ID
 - `bastion_ebs_optimized` - If true, the bastion instance will be EBS-optimized (default: `false`)
 - `bastion_instance_type` - Instance type for bastion instance (default: `t3.nano`)
+- `tags` - Extra tags to attach to the VPC resources (default: `{}`)
 
 ## Outputs
 
