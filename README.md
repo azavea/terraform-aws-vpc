@@ -87,14 +87,14 @@ resource "aws_network_interface_sg_attachment" "sg_attachment" {
 - `project` - Name of project this VPC is meant to house (default: `Unknown`)
 - `environment` - Name of environment this VPC is targeting (default: `Unknown`)
 - `region` - Region of the VPC (default: `us-east-1`)
-- `key_name` - EC2 Key pair name
-- `cidr_block` - CIDR block to allocate for the VPC (default: `10.0.0.0/16`)
+- `key_name` - EC2 Key pair name for the bastion
+- `cidr_block` - CIDR block for the VPC (default: `10.0.0.0/16`)
 - `public_subnet_cidr_blocks` - List of public subnet CIDR blocks (default: `["10.0.0.0/24","10.0.2.0/24"]`)
 - `private_subnet_cidr_blocks` - List of private subnet CIDR blocks (default: `["10.0.1.0/24", "10.0.3.0/24"]`)
 - `availability_zones` - List of availability zones (default: `["us-east-1a", "us-east-1b"]`)
 - `bastion_ami` - Bastion Amazon Machine Image (AMI) ID
 - `bastion_ebs_optimized` - If true, the bastion instance will be EBS-optimized (default: `false`)
-- `bastion_instance_type` - Instance type for bastion instance (default: `t2.micro`)
+- `bastion_instance_type` - Instance type for bastion instance (default: `t3.nano`)
 
 ## Outputs
 
@@ -103,6 +103,6 @@ resource "aws_network_interface_sg_attachment" "sg_attachment" {
 - `private_subnets_ids` - List of private subnet IDs
 - `bastion_hostname` - Public DNS name for bastion instance
 - `bastion_security_group_id` - Security group ID tied to bastion instance
+- `bastion_network_interface_id` - ENI ID of the Bastion instance's primary network interface
 - `cidr_block` - The CIDR block associated with the VPC
 - `nat_gateway_ips` - List of Elastic IPs associated with NAT gateways
-- `bastion_network_interface_id` - ID of the Bastion instance's primary network interface
