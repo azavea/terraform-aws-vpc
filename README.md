@@ -49,12 +49,12 @@ In order to configure security rules for the bastion, use the
 
 ```hcl
 resource "aws_security_group_rule" "ssh_ingress" {
-  security_group_id = "${module.vpc.bastion_security_group_id}"
+  security_group_id = module.vpc.bastion_security_group_id
   type              = "ingress"
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = ["${var.bastion_inbound_cidr_block}"]
+  cidr_blocks       = [var.bastion_inbound_cidr_block]
 }
 ```
 
@@ -65,19 +65,19 @@ using the `bastion_network_interface_id` output and an
 
 ```hcl
 resource "aws_security_group" "ssh_ingress" {
-  vpc_id = "${module.vpc.id}"
+  vpc_id = module.vpc.id
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${var.bastion_inbound_cidr_block}"]
+    cidr_blocks = [var.bastion_inbound_cidr_block]
   }
 }
 
 resource "aws_network_interface_sg_attachment" "sg_attachment" {
-  security_group_id    = "${aws_security_group.ssh_ingress.id}"
-  network_interface_id = "${module.vpc.bastion_network_interface_id}"
+  security_group_id    = aws_security_group.ssh_ingress.id
+  network_interface_id = module.vpc.bastion_network_interface_id
 }
 ```
 
@@ -104,6 +104,6 @@ resource "aws_network_interface_sg_attachment" "sg_attachment" {
 - `private_subnets_ids` - List of private subnet IDs
 - `bastion_hostname` - Public DNS name for bastion instance
 - `bastion_security_group_id` - Security group ID tied to bastion instance
-- `bastion_network_interface_id` - ENI ID of the Bastion instance's primary network interface
+- `bastion_network_interface_id` - Elastic Network Interface (ENI) ID of the Bastion instance's primary network interface
 - `cidr_block` - The CIDR block associated with the VPC
 - `nat_gateway_ips` - List of Elastic IPs associated with NAT gateways

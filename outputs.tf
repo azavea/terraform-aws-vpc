@@ -25,7 +25,7 @@ output "bastion_security_group_id" {
 
 output "bastion_network_interface_id" {
   value       = aws_instance.bastion.primary_network_interface_id
-  description = "ENI ID of the Bastion instance's primary network interface"
+  description = "Elastic Network Interface (ENI) ID of the Bastion instance's primary network interface"
 }
 
 output "cidr_block" {
