@@ -1,3 +1,10 @@
+## 6.0.0
+
+- Add support for Terraform 0.12.
+- Update the default for `bastion_instance_type` to `t3.nano`.
+- Add a `tags` variable.
+- Add continuous integration support via CircleCI.
+
 ## 5.0.1
 
 - `element()` -> `listvar[idx]`
