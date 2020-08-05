@@ -1,3 +1,7 @@
+## 6.0.1
+
+- Fix deprecated use of quoted resource in `depends_on`.
+
 ## 6.0.0
 
 - Add support for Terraform 0.12.
