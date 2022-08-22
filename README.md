@@ -1,10 +1,7 @@
 # terraform-aws-vpc
 
 **Warning**
-Maintenance only. Not recommended to use for new projects.
-
-[![CircleCI](https://circleci.com/gh/azavea/terraform-aws-vpc.svg?style=svg)](https://circleci.com/gh/azavea/terraform-aws-vpc)
-
+Maintenance only. Not recommended to use for new projects (moving away from NAT Gateway's recommended).
 
 A Terraform module to create an Amazon Web Services (AWS) Virtual Private Cloud (VPC).
 
